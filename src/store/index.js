@@ -52,8 +52,21 @@ export default new Vuex.Store({
             
             })
           }
-    localStorage.setItem('cart',JSON.stringify(state.cart))
-  }
+      localStorage.setItem('cart',JSON.stringify(state.cart))
+    },
+    removeitem({commit,state},This){
+      console.log("removedobj",This.obj)
+      if(This.obj.count > 1){
+        This.obj.totalPrice = This.obj.totalPrice - This.obj.Price
+        This.obj.count = This.obj.count - 1;
+      }
+      else{
+          state.cart= state.cart.filter(obj =>{
+            return obj.Product != This.obj.Product
+          })
+      }
+      localStorage.setItem("cart",JSON.stringify(state.cart))
+    }
   },
   modules: {
   }

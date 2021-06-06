@@ -62,7 +62,10 @@
       </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-      <h6 style="text-align:center">Cart</h6>
+      <h6 style="text-align:center;margin-top: 1px;">Cart
+        <q-icon name="shopping_cart"/>
+      </h6>
+      <q-scroll-area :delay="1200" style="height: 340px; max-width: 415px;">
       <q-card class="cart-card" v-for="item in cart" :key="item.Product">
         <q-card-section>
             Product: <b>{{item.Product}}</b>
@@ -74,9 +77,17 @@
            Price: <b>{{item.Price}}</b>
           </q-card-section>
           <q-card-section>
-           TotalPrice: <b>{{item.totalPrice}}</b>
+            Quantity:<b>{{item.count}}</b>
+          </q-card-section>
+          <q-card-section>
+            TotalPrice: <b>{{item.totalPrice}}</b>
+          </q-card-section>
+          
+          <q-card-section>
+            <q-btn color="red" label="Remove Item" icon="delete" @click="removeitem(item)" />
           </q-card-section>
       </q-card>
+      </q-scroll-area>
     </div>
   </div>
 </q-page>
@@ -126,6 +137,9 @@ export default {
       addtocart(obj){
         console.log("object",obj)
         this.$store.dispatch('addtocart',{this:this,obj:obj})
+      },
+      removeitem(obj){
+        this.$store.dispatch('removeitem',{this:this,obj:obj})
       }
       
   }

@@ -3,7 +3,8 @@
     <q-header elevated class="glossy">
       <q-toolbar>
         <q-toolbar-title style="text-align:center">
-          Product Catalog with cart
+          Product Catalog
+          <q-icon name="shopping_cart"/>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
