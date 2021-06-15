@@ -10,7 +10,8 @@ export default new Vuex.Store({
       {Product:'Mobile',Description:'A Beautiful Iphone Mobile',Price:1000,Availbility:5},
       {Product:'Speaker',Description:'A Beautiful Speaker ',Price:2000,Availbility:7},
     ],
-    cart:[]
+    cart:[],
+    totalamount:0
   },
   mutations: {
     SET_PRODUCTS(state,Products){
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     SET_TO_CART(state,cart){
       state.cart = cart
+    },
+    SET_TOTALAMOUNT(state,totalamount){
+      state.totalamount = totalamount
     }
   },
   actions: {
@@ -35,6 +39,7 @@ export default new Vuex.Store({
               if(obj.count < This.obj.Availbility){
               obj.totalPrice += This.obj.Price
               obj.count += 1;
+              state.totalamount = state.totalamount + This.obj.Price;
             }
             else{
               console.log("validated")
@@ -51,21 +56,26 @@ export default new Vuex.Store({
               count:1
             
             })
+            state.totalamount = state.totalamount+This.obj.Price;
           }
       localStorage.setItem('cart',JSON.stringify(state.cart))
+      localStorage.setItem("totalamount",state.totalamount)
     },
     removeitem({commit,state},This){
       console.log("removedobj",This.obj)
       if(This.obj.count > 1){
         This.obj.totalPrice = This.obj.totalPrice - This.obj.Price
         This.obj.count = This.obj.count - 1;
+        state.totalamount = state.totalamount-This.obj.Price;
       }
       else{
-          state.cart= state.cart.filter(obj =>{
+          state.cart = state.cart.filter(obj =>{
             return obj.Product != This.obj.Product
           })
+          state.totalamount = state.totalamount-This.obj.Price;
       }
       localStorage.setItem("cart",JSON.stringify(state.cart))
+      localStorage.setItem("totalamount",state.totalamount)
     }
   },
   modules: {

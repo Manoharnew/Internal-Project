@@ -88,6 +88,9 @@
           </q-card-section>
       </q-card>
       </q-scroll-area>
+      <div>
+        <label> Total Amount:{{ $store.state.totalamount }}</label>
+      </div>
     </div>
   </div>
 </q-page>
